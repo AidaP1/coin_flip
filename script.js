@@ -29,41 +29,49 @@ function getGuess () {
     }   
 }
 
+function updateWinnings(target,bet) {
+    roundWinnings = bet * 1.5;
+    let formattedRoundWinnings = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'GBP' }).format(roundWinnings);
+    roundWinningText.innerHTML = `Winnings this round: ${formattedRoundWinnings}`;
+    totalWinnings += (roundWinnings * 1);
+    let formattedTotalWinnings = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'GBP' }).format(totalWinnings);
+    totalWinningText.innerHTML = `Total Winnings: ${formattedTotalWinnings}`;
+    roundResultText.innerHTML = `${target} - You won!`;
+    roundResultText.style.visibility = 'visible';
+}
+
+function updateLosses(target) {
+    roundResultText.innerHTML = `${target} - You Lost!`;
+    roundResultText.style.visibility = 'visible';
+    roundWinningText.innerHTML = `Winnings this round: £0.00`;
+}
+
+
 
 function playGame () {
     let targetResult = coinFlip();
     let playerGuess = getGuess();
+    let playerBet = document.getElementById("bet").value;
     if (playerGuess === undefined) {
         roundResultText.innerHTML = `You have to make a guess`;
         roundResultText.style.visibility = 'visible';
         return 'invalid';
-    }
-    let playerBet = document.getElementById("bet").value;
-    if (playerBet > 0) {
-        betTotal += playerBet;
-        if (targetResult === playerGuess) {
-            roundWinnings = playerBet * 1.5;
-            let formattedRoundWinnings = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'GBP' }).format(roundWinnings);
-            roundWinningText.innerHTML = `Winnings this round: ${formattedRoundWinnings}`;
-            totalWinnings += (roundWinnings * 1);
-            let formattedTotalWinnings = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'GBP' }).format(totalWinnings);
-            totalWinningText.innerHTML = `Total Winnings: ${formattedTotalWinnings}`;
-            roundResultText.innerHTML = `${targetResult} - You won!`;
-            roundResultText.style.visibility = 'visible';
-        } else {
-            roundResultText.innerHTML = `${targetResult} - You Lost!`;
-            roundResultText.style.visibility = 'visible';
-        }
-    } else if (playerBet === 0) {
+    } else if (playerBet * 1 === 0) {
         roundResultText.innerHTML = `You have to bet first`;
         roundResultText.style.visibility = 'visible';
         return 'invalid';
-    } else {
+    } else if (playerBet * 1 < 0) {
         roundResultText.innerHTML = `You can't bet a negative amount`;
         roundResultText.style.visibility = 'visible';
         return 'invalid';
+    } else {
+        betTotal += playerBet;
+        if (targetResult === playerGuess) {
+            updateWinnings(targetResult,playerBet)
+        } else {
+            updateLosses(targetResult);
+        }
     }
-
 }
 
 function focusOn () {

@@ -22,8 +22,8 @@
             </form>
             <section class="results">
                 <h3 id="round-result">Hold</h3>
-                <p id="rwin">Winnings this round: £0</p>
-                <p id="totwin">Total Winnings: £0</p>
+                <p id="rwin">Winnings this round: £0.00</p>
+                <p id="totwin">Total Winnings: £0.00</p>
             </section>
             <button id="target">Play</button>     
         </main>
