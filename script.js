@@ -33,6 +33,11 @@ function getGuess () {
 function playGame () {
     let targetResult = coinFlip();
     let playerGuess = getGuess();
+    if (playerGuess === undefined) {
+        roundResultText.innerHTML = `You have to make a guess`;
+        roundResultText.style.visibility = 'visible';
+        return 'invalid';
+    }
     let playerBet = document.getElementById("bet").value;
     if (playerBet > 0) {
         betTotal += playerBet;
@@ -52,9 +57,11 @@ function playGame () {
     } else if (playerBet === 0) {
         roundResultText.innerHTML = `You have to bet first`;
         roundResultText.style.visibility = 'visible';
+        return 'invalid';
     } else {
         roundResultText.innerHTML = `You can't bet a negative amount`;
         roundResultText.style.visibility = 'visible';
+        return 'invalid';
     }
 
 }
