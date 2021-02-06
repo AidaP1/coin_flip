@@ -2,11 +2,13 @@
 <html>
     <header>
         <title>Coin Flip</title>
-        
+        <link href="./style.css" type="text/css" rel="stylesheet">
     </header>
     <body>
-        <h1 id="text">Flip a coin!</h1>
-        <button id="target">Click me</button>
+        <main>
+            <h1 id="text">Flip a coin!</h1>
+                <button id="target">Click me</button>     
+        </main>
         <script src="./script.js"></script>
     </body>
 </html>

@@ -1,13 +1,25 @@
 let target = document.getElementById("target");
-let text = document.getElementById('text');
+let mainText = document.getElementById('text');
 
-let coinFlip = function () {
+
+function coinFlip () {
     let coinVal = Math.floor(Math.random() * 2);
     if (coinVal === 1) {
-        text.innerHTML = 'Heads';
+        mainText.innerHTML = 'Heads';
     } else {
         text.innerHTML = 'Tails';
     }
+    target.innerHTML = 'Flip Again'
+}
+
+function focusOn () {
+    target.style.backgroundColor = 'hsl(30 100% 50%)';
+}
+
+function focusOff () {
+    target.style.backgroundColor = 'hsl(30 50% 80%)';
 }
 
 target.addEventListener('click',coinFlip);
+target.addEventListener('mouseenter',focusOn);
+target.addEventListener('mouseleave',focusOff);
