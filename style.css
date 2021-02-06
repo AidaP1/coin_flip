@@ -82,6 +82,7 @@ button {
     margin-bottom: 10px;
     font-weight: 700;
     font-size: 35px;
+    height: 75px;
     visibility: hidden;
 }
 

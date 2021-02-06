@@ -34,18 +34,26 @@ function playGame () {
     let targetResult = coinFlip();
     let playerGuess = getGuess();
     let playerBet = document.getElementById("bet").value;
-    betTotal += playerBet;
-    if (targetResult === playerGuess) {
-        roundWinnings = playerBet * 1.5;
-        let formattedRoundWinnings = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'GBP' }).format(roundWinnings);
-        roundWinningText.innerHTML = `Winnings this round: ${formattedRoundWinnings}`;
-        totalWinnings += (roundWinnings * 1);
-        let formattedTotalWinnings = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'GBP' }).format(totalWinnings);
-        totalWinningText.innerHTML = `Total Winnings: ${formattedTotalWinnings}`;
-        roundResultText.innerHTML = `${targetResult} - You won!`;
+    if (playerBet > 0) {
+        betTotal += playerBet;
+        if (targetResult === playerGuess) {
+            roundWinnings = playerBet * 1.5;
+            let formattedRoundWinnings = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'GBP' }).format(roundWinnings);
+            roundWinningText.innerHTML = `Winnings this round: ${formattedRoundWinnings}`;
+            totalWinnings += (roundWinnings * 1);
+            let formattedTotalWinnings = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'GBP' }).format(totalWinnings);
+            totalWinningText.innerHTML = `Total Winnings: ${formattedTotalWinnings}`;
+            roundResultText.innerHTML = `${targetResult} - You won!`;
+            roundResultText.style.visibility = 'visible';
+        } else {
+            roundResultText.innerHTML = `${targetResult} - You Lost!`;
+            roundResultText.style.visibility = 'visible';
+        }
+    } else if (playerBet === 0) {
+        roundResultText.innerHTML = `You have to bet first`;
         roundResultText.style.visibility = 'visible';
     } else {
-        roundResultText.innerHTML = `${targetResult} - You Lost!`;
+        roundResultText.innerHTML = `You can't bet a negative amount`;
         roundResultText.style.visibility = 'visible';
     }
 
