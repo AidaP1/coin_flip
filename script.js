@@ -60,6 +60,10 @@ function playGame () {
         roundResultText.innerHTML = `You have to bet first`;
         roundResultText.style.visibility = 'visible';
         return 'invalid';
+    } else if (playerBet * 1 > 20) {
+        roundResultText.innerHTML = `Max bet is £20`;
+        roundResultText.style.visibility = 'visible';
+        return 'invalid';
     } else if (playerBet * 1 < 0) {
         roundResultText.innerHTML = `You can't bet a negative amount`;
         roundResultText.style.visibility = 'visible';
